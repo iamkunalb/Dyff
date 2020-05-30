@@ -1,0 +1,31 @@
+{
+  "name": "dyff",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "firebase": "^7.14.3",
+    "react": "^16.13.1",
+    "react-bootstrap-icons": "^1.0.1-alpha3",
+    "react-dom": "^16.13.1",
+    "react-image-gallery": "^1.0.7",
+    "react-redux": "^7.2.0",
+    "react-responsive-carousel": "^3.2.5",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "0.9.x",
+    "react-slick": "^0.25.2",
+    "redux": "^4.0.5",
+    "slick-carousel": "^1.8.1",
+    "yarn": "^1.22.4"
+  },
+  "devDependencies": {
+    "css-loader": "^3.5.3",
+    "style-loader": "^1.2.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
