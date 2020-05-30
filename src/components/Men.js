@@ -43,8 +43,6 @@ class Men extends Component {
         this.updateProds(temp);
     }
 
-   
-
     updateProds(filterProd){
         let ff = []
         this.setState({jign: []})

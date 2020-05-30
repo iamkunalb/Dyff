@@ -100,11 +100,11 @@ export default class Navbar extends Component {
                                     </Link>
                                 </li>
 
-                                <li className="label1" data-label1="hot">
+                                {/* <li className="label1" data-label1="hot">
                                     <Link to="/onsale">
                                         On Sale
                                     </Link>
-                                </li>
+                                </li> */}
 
                                 <li>
                                     <Link to="/about">
@@ -187,7 +187,8 @@ export default class Navbar extends Component {
 
                 <div id="cart" className="cart" style={{width: this.state.cartWidth}}>
                     <a className="closebtn" onClick={this.closecart}>&times;</a>
-                    <div style={{height: '90%', overflow: 'auto'}}>
+                    <h1 style={{textAlign: "center", margin: 10, marginTop: 0}}>Cart</h1>
+                    <div style={{height: '80%', overflow: 'scroll'}}>
                         <Cart/>
                     </div>
                     

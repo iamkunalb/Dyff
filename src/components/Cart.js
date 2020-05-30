@@ -13,7 +13,7 @@ class Cart extends Component {
         this.props.itemsFromNav.map((ite) => {
             let namee = ite.name.split(' ').join('-');
             sd.push(
-                <div key={i} style={{height: '150px'}}>
+                <div key={i} style={{height: '150px',backgroundColor: 'rgb(0,0,0,0)', padding: 10, margin: 10}}>
                     <img src={require('../images/products/' + ite.image)} style={{width: '100px', height: '120px', float: 'left', marginLeft: '20px', marginRight: '20px'}} alt="product"/>
                     <Link to={"/men/"+ namee}><h3>{ite.name}</h3></Link>
                     <h5>${ite.price}.00</h5>

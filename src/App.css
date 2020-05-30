@@ -3362,6 +3362,11 @@ input.num-product::-webkit-inner-spin-button {
   border-bottom: 1px solid black;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+
 .cart {
   height: 100%;
   width: 0;
@@ -3369,8 +3374,9 @@ input.num-product::-webkit-inner-spin-button {
   z-index: 1;
   top: 0;
   right: 0;
-  background-color: rgba(255, 255, 255,0.6);
+  background-color: rgb(255, 255, 255);
   overflow-x: hidden;
+  overflow: hidden;
   transition: 0.5s;
   padding-top: 60px;
 }

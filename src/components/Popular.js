@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
 import armDay from '../images/products/dyff-arm-day.png'
+import db from '../Config'
 
 
 export default class Popular extends Component {
@@ -19,7 +20,7 @@ export default class Popular extends Component {
               settings: {
                 slidesToShow: 3,
                 slidesToScroll: 3,
-                infinite: true,
+                infinite: false,
                 dots: true
               }
             },
@@ -40,43 +41,43 @@ export default class Popular extends Component {
             }
           ]
         };
+
+        let gg = [{name: 'hello', price:10}, {name: 'GG', price:30},{name: 'hello', price:10}, {name: 'GG', price:30},{name: 'hello', price:10}, {name: 'GG', price:30}]
+        let ff = []
+        // let gg = []
+        
+        // db.collection('products').get().then(
+        //   snapshot => {
+        //     snapshot.docs.map((doc) => {
+        //       // console.log(doc.data().name)
+        //       gg.push(
+        //         <div style={{textAlign: 'center', display: 'block'}}>
+        //         <img height="auto" width="80%" src={armDay} alt="prod1"/>
+        //         <h3>{doc.data().name}</h3>
+        //         <h3>{doc.data().price}</h3>
+        //       </div>
+        //       )
+        //     })
+        //   }
+        // )
+        // console.log(gg)
+          
+        for (let i = 0; i < gg.length;i++){
+          ff.push(
+              <div key={i} style={{textAlign: 'center', display: 'block'}}>
+                <img height="auto" width="80%" src={armDay} alt="prod1"/>
+                <h3>{gg[i].name}</h3>
+                <h3>{gg[i].price}</h3>
+              </div>
+          )
+        }
+
+
         return (
           <div style={{margin: '10vh 10vw 10vh 10vw'}}>
             <h2> Popular </h2>
             <Slider {...settings}>
-              <div style={{textAlign: 'center', display: 'block'}}>
-                <img height="auto" width="80%" src={armDay} alt="prod1"/>
-                <h3 >1</h3>
-              </div>
-              <div>
-                <img height="auto" width="80%" src={armDay} alt="prod1"/>
-
-                <h3 >2</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%" src={armDay} alt="prod1"/>
-                <h3 >3</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%"  src={armDay} alt="prod1"/>
-                <h3 >4</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%"  src={armDay} alt="prod1"/>
-                <h3 >5</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%"  src={armDay} alt="prod1"/>
-                <h3 >6</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%"  src={armDay} alt="prod1"/>
-                <h3 >7</h3>
-              </div>
-              <div>
-              <img height="auto" width="80%"  src={armDay} alt="prod1"/>
-                <h3 >8</h3>
-              </div>
+              {ff}
             </Slider>
           </div>
         );

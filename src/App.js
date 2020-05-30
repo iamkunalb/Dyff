@@ -14,6 +14,11 @@ import Footer from './components/footer'
 import Default from './components/Default'
 import Faq from './components/Faq'
 import Product from './components/Product'
+import DeliveryInfo from './components/DeliveryInfo'
+import Returns from './components/Returns'
+import Charities from './components/Charities'
+import Terms from './components/Terms'
+import Privacy from './components/Privacy'
 
 class App extends Component {
   render() {
@@ -29,6 +34,11 @@ class App extends Component {
           <Route path="/contact" component={Contact}/>
           <Route path="/login" component={Login}/>
           <Route path="/faq" component={Faq}/>
+          <Route path="/delivery-information" component={DeliveryInfo}/>
+          <Route path="/returns" component={Returns}/>
+          <Route path="/charities" component={Charities}/>
+          <Route path="/terms-and-conditions" component={Terms}/>
+          <Route path="/privacy-policy" component={Privacy}/>
           <Route path="/men/:id" component={Product} />
           <Route path="/women/:id" component={Product} />
           <Route path="/onsale/:id" component={Product} />

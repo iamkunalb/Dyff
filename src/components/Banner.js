@@ -20,9 +20,9 @@ export default class Banner extends Component {
                                                 Women
                                             </span>
 
-                                            <span className="block1-info stext-102 trans-04">
-                                                Spring 2018
-                                            </span>
+                                            {/* <span className="block1-info stext-102 trans-04">
+                                                New In
+                                            </span> */}
                                         </div>
 
                                         <div className="block1-txt-child2 p-b-4 trans-05">
@@ -46,9 +46,9 @@ export default class Banner extends Component {
                                                 Men
                                             </span>
 
-                                            <span className="block1-info stext-102 trans-04">
+                                            {/* <span className="block1-info stext-102 trans-04">
                                                 Spring 2018
-                                            </span>
+                                            </span> */}
                                         </div>
 
                                         <div className="block1-txt-child2 p-b-4 trans-05">

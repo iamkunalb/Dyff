@@ -38,18 +38,18 @@ export default class footer extends Component {
                                 Women
                             </Link>
                             <br/>
-                            <Link to="/onsale">
+                            {/* <Link to="/onsale">
                                 On Sale
-                            </Link>
+                            </Link> */}
                         </div>
 
                         <div className="col-xs-6 col-md-3 d-none d-md-block">
                             <h6>Info</h6>
-                            <Link to="/men">
+                            <Link to="/delivery-information">
                                 Delivery Information
                             </Link>
                             <br/>
-                            <Link to="/women">
+                            <Link to="/returns">
                                 Returns Policy
                             </Link>
                             <br/>
@@ -108,11 +108,11 @@ export default class footer extends Component {
 
                         <div className="col-xs-6 mr-3 d-md-none">
                             <h6>Info</h6>
-                            <Link to="/men">
+                            <Link to="/delivery-information">
                                 Delivery Information
                             </Link>
                             <br/>
-                            <Link to="/women">
+                            <Link to="/returns">
                                 Returns Policy
                             </Link>
                             <br/>
