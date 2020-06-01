@@ -10,7 +10,7 @@ db.collection('products').get().then(
 )
 
 const reducer = (state, action) => {
-    console.log(action)
+    console.log("IND", action.item)
     if (state === undefined){
         return{
             forSale: gg,
@@ -27,7 +27,8 @@ const reducer = (state, action) => {
             }
         }
         case 'REMOVE_FROM_CART': {
-            const cart = [...state.cart, action.item]
+            const cart = [...state.cart]
+            cart.splice(action.item, 1)
             return {
                 ...state,
                 cart

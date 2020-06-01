@@ -126,7 +126,7 @@ export default class Navbar extends Component {
                             </div>
 
                             <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                                <i className="zmdi zmdi-shopping-cart" onClick={this.openCart}>Cart</i>
+                                <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart} src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
                             </div>
                         </div>
                     </nav>

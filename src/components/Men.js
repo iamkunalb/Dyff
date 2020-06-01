@@ -32,11 +32,11 @@ class Men extends Component {
         })
         let temp = [];
         if (e.target.value === "Price - Low to High"){
-            temp = this.state.products.sort(function(a, b) {
+            temp = this.props.dsds.sort(function(a, b) {
                 return a.price - b.price;
             });
         }else if(e.target.value === "Price - High to Low"){
-            temp = this.state.products.sort(function(a, b) {
+            temp = this.props.dsds.sort(function(a, b) {
                 return b.price - a.price;
             });
         }
@@ -54,7 +54,7 @@ class Men extends Component {
                         <div className="block2" style={{width: 'auto', float:'left'}}>
                             <div className="block2-pic hov-img0 " style={{height:'180px', width:'130px', overflow:'hidden'}}>
                                 <img id="prodImage" style={{height: '180px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
-                                <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc.name)}>
+                                <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)}>
                                     Quick View
                                 </button>
                             </div>
@@ -74,7 +74,7 @@ class Men extends Component {
                         <div className="block2" style={{width: 'auto', float:'left'}}>
                             <div className="block2-pic hov-img0" style={{height:'300px', width:'240px', overflow:'hidden'}}>
                                 <img id="prodImage" style={{height: '300px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
-                                <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc.name)} >
+                                <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)} >
                                     Quick View
                                 </button>
                             </div>
@@ -104,14 +104,15 @@ class Men extends Component {
         let i = 0;
         db.collection('products').get().then(
             snapshot => {
-                this.props.dsds.forEach(doc => {
+                this.props.dsds.map((doc, index) => {
+                    console.log(index)
                     let namee = doc.name.split(' ').join('-');
-                    ff.push(<div key={i} style={{margin: '0 auto',textAlign: 'center'}}>
+                    ff.push(<div key={index} style={{margin: '0 auto',textAlign: 'center'}}>
                             <div className="col-sm-6 col-md-4 col-lg-3 mt-5 isotope-item d-block d-sm-none" style={{width: 'auto', float:'left'}}>
                                 <div className="block2" style={{width: 'auto', float:'left'}}>
                                     <div className="block2-pic hov-img0 " style={{height:'180px', width:'130px', overflow:'hidden'}}>
                                         <img id="prodImage" style={{height: '180px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
-                                        <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc.name)}>
+                                        <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)}>
                                             Quick View
                                         </button>
                                     </div>
@@ -148,7 +149,6 @@ class Men extends Component {
                             </div>
                         </div>
                     )
-                    i+=1;
                     this.setState ({
                         jign: ff
                     })
