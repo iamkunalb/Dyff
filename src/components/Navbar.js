@@ -12,7 +12,8 @@ export default class Navbar extends Component {
         this.state = {
             display : "block",
             sideWidth: "0",
-            cartWidth: "0"
+            cartWidth: "0",
+            sd: 3
         };
 
         this.myFunction = this.myFunction.bind(this);
@@ -20,6 +21,8 @@ export default class Navbar extends Component {
         this.closecart = this.closecart.bind(this);
         this.openCart = this.openCart.bind(this);
     }
+
+    
 
     myFunction() {
         if (this.state.sideWidth === "350px") {
@@ -125,8 +128,8 @@ export default class Navbar extends Component {
                                 <i className="zmdi zmdi-search"></i>
                             </div>
 
-                            <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify="2">
-                                <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart} src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
+                            <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify={this.state.sd}>
+                                <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart}  src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
                             </div>
                         </div>
                     </nav>
@@ -146,8 +149,8 @@ export default class Navbar extends Component {
                             <i className="zmdi zmdi-search"></i>
                         </div>
 
-                        <div className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify="2">
-                            <i className="zmdi zmdi-shopping-cart" onClick={this.openCart}>Cart</i>
+                        <div className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify={this.state.sd}>
+                            <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart}  src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
                         </div>
                     </div>
 

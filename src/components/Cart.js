@@ -39,6 +39,7 @@ class Cart extends Component {
         console.log(sd)
         let fruits_without_duplicates = Array.from(new Set(sd));
         console.log(fruits_without_duplicates)
+        
         return (
             <div>
                 {sd}
