@@ -18,27 +18,26 @@ class Cart extends Component {
     render() {
         let sd = []
         let i = 0;
-        this.props.itemsFromNav.map((ite, index) => {
-            // console.log(ite.name)
-            // let namee = ''
-            // if (ite.name !== null){
-            //     namee = ite.name.split(' ').join('-');
-            // }
+        
+        let fruits_without_duplicates = this.props.itemsFromNav;
+        
+        let pp = fruits_without_duplicates.filter((ele, ind) => ind === fruits_without_duplicates.findIndex(elem => elem.name === ele.name))
+        
+
+        pp.map((ite, index) => {
             sd.push(
-                <div key={i} style={{height: '150px',backgroundColor: 'rgb(0,0,0,0)', padding: 10, margin: 10}}>
+                <div key={index} style={{height: '150px',backgroundColor: 'rgb(0,0,0,0)', padding: 10, margin: 10}}>
                     <img src={require('../images/products/' + ite.image)} style={{width: '100px', height: '120px', float: 'left', marginLeft: '20px', marginRight: '20px'}} alt="product"/>
                     <h5>{ite.name}</h5>
                     <h5>${ite.price}.00</h5>
                     <h5>QTY: {this.qty(ite.name)}</h5>
-                    <button onClick={() => this.props.removeFromCart(index)} style={{border: '1px solid red',padding: 3, paddingLeft: 6,  paddingRight: 6, marginTop: 5 }}>Remove</button>
+                    <button onClick={() => this.props.removeFromCart(fruits_without_duplicates.findIndex(elem => elem.name === ite.name))} style={{border: '1px solid red',padding: 3, paddingLeft: 6,  paddingRight: 6, marginTop: 5 }}>Remove</button>
                 </div>
             )
             i+=1;
         })
 
-        console.log(sd)
-        let fruits_without_duplicates = Array.from(new Set(sd));
-        console.log(fruits_without_duplicates)
+        
         
         return (
             <div>

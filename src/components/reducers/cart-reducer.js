@@ -10,7 +10,6 @@ db.collection('products').get().then(
 )
 
 const reducer = (state, action) => {
-    console.log("IND", action.item)
     if (state === undefined){
         return{
             forSale: gg,

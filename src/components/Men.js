@@ -105,7 +105,6 @@ class Men extends Component {
         db.collection('products').get().then(
             snapshot => {
                 this.props.dsds.map((doc, index) => {
-                    console.log(index)
                     let namee = doc.name.split(' ').join('-');
                     ff.push(<div key={index} style={{margin: '0 auto',textAlign: 'center'}}>
                             <div className="col-sm-6 col-md-4 col-lg-3 mt-5 isotope-item d-block d-sm-none" style={{width: 'auto', float:'left'}}>
@@ -180,7 +179,6 @@ class Men extends Component {
 }
 
 function mapStateToProps(state){
-    console.log('state', state)
     return{
         dsds: state.forSale
     }
