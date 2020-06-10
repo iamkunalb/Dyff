@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
-import slider1 from '../images/slide-01.jpg'
 import slider2 from '../images/slide-02.jpg'
 import {Link} from 'react-router-dom'
 import db from '../Config'
 import Filter from './filter'
-import Modal from './Modal'
+// import Modal from './Modal'
 // import { addToCart } from './actions/cartActions'
 import {connect} from 'react-redux'
 
@@ -16,15 +15,23 @@ class Men extends Component {
             products: [],
             sort: '',
             show: false,
+            error: ""
         }
         this.handleSort = this.handleSort.bind(this);
         this.updateProds = this.updateProds.bind(this);
         this.showModal = this.showModal.bind(this);
+        this.refine = this.refine.bind(this);
     }
 
     showModal(){
         this.setState({show:true})
     }
+
+    handleAdd(e){
+        this.props.addToCart(e)
+    }
+
+    
 
     handleSort(e){
         this.setState({
@@ -43,7 +50,34 @@ class Men extends Component {
         this.updateProds(temp);
     }
 
+    refine(e){
+        let temp = []
+        this.props.dsds.map((doc) => {
+            doc.color.map((color) => {
+                if (e.currentTarget.value === "all"){
+                    temp = this.props.dsds;
+                }else if (color === e.currentTarget.value){
+                    console.log(color)
+                    temp.push(doc)
+                }
+            })
+        })
+        if (temp !== []){
+            this.updateProds(temp);
+            this.setState({
+                error: ""
+            })
+        }
+        if (temp === undefined || temp.length == 0){
+            // console.log("emp")
+            this.setState({
+                error: "No Items Found!"
+            })
+        }
+    }
+
     updateProds(filterProd){
+        
         let ff = []
         this.setState({jign: []})
         let i = 0
@@ -53,9 +87,11 @@ class Men extends Component {
                     <div className="col-sm-6 col-md-4 col-lg-3 mt-5 isotope-item d-block d-sm-none" style={{width: 'auto', float:'left'}}>
                         <div className="block2" style={{width: 'auto', float:'left'}}>
                             <div className="block2-pic hov-img0 " style={{height:'180px', width:'130px', overflow:'hidden'}}>
-                                <img id="prodImage" style={{height: '180px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                <Link to={"/men/"+namee}>
+                                    <img id="prodImage" style={{height: '100%', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                </Link>  
                                 <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)}>
-                                    Quick View
+                                Add To Cart
                                 </button>
                             </div>
 
@@ -73,9 +109,11 @@ class Men extends Component {
                     <div className="col-sm-6 col-md-4 col-lg-3 m-1 mt-5 isotope-item d-none d-sm-block" style={{width: 'auto', float:'left'}}>
                         <div className="block2" style={{width: 'auto', float:'left'}}>
                             <div className="block2-pic hov-img0" style={{height:'300px', width:'240px', overflow:'hidden'}}>
-                                <img id="prodImage" style={{height: '300px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                <Link to={"/men/"+namee}>
+                                    <img id="prodImage" style={{height: '100%', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                </Link>  
                                 <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)} >
-                                    Quick View
+                                Add To Cart
                                 </button>
                             </div>
 
@@ -97,11 +135,10 @@ class Men extends Component {
             })
         })
     }
-
+    
     componentDidMount(){
         window.scrollTo(0, 0);
         let ff = []
-        let i = 0;
         db.collection('products').get().then(
             snapshot => {
                 this.props.dsds.map((doc, index) => {
@@ -110,9 +147,11 @@ class Men extends Component {
                             <div className="col-sm-6 col-md-4 col-lg-3 mt-5 isotope-item d-block d-sm-none" style={{width: 'auto', float:'left'}}>
                                 <div className="block2" style={{width: 'auto', float:'left'}}>
                                     <div className="block2-pic hov-img0 " style={{height:'180px', width:'130px', overflow:'hidden'}}>
-                                        <img id="prodImage" style={{height: '180px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                        <Link to={"/men/"+namee}>
+                                            <img id="prodImage" style={{height: '100%', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                        </Link>  
                                         <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)}>
-                                            Quick View
+                                            Add To Cart
                                         </button>
                                     </div>
         
@@ -127,12 +166,15 @@ class Men extends Component {
                                 </div>
                             </div>
         
+
                             <div className="col-sm-6 col-md-4 col-lg-3 m-1 mt-5 isotope-item d-none d-sm-block" style={{width: 'auto', float:'left'}}>
                                 <div className="block2" style={{width: 'auto', float:'left'}}>
                                     <div className="block2-pic hov-img0" style={{height:'300px', width:'240px', overflow:'hidden'}}>
-                                        <img id="prodImage" style={{height: '300px', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                        <Link to={"/men/"+namee}>
+                                            <img id="prodImage" style={{height: '100%', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/>
+                                        </Link>
                                         <button className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04" onClick={() => this.props.addToCart(doc)}>
-                                            Quick View
+                                        Add To Cart
                                         </button>
                                     </div>
         
@@ -164,15 +206,44 @@ class Men extends Component {
                 </div>
             
                 <div style={{position:'relative', textAlign: 'center', maxHeight: '500px', overflow: 'hidden'}} className="d-none d-xl-block">
-                    <img  width="80%" style={{minWidth: '300px'}} height="auto" src={slider1} alt="sliderPic"/>
+                    <img  width="80%" style={{minWidth: '300px'}} height="auto" src={slider2} alt="sliderPic"/>
                 </div>
-                <Filter sort={this.state.sort} handleSort={this.handleSort}/>
-                <div className="container" >
-                    <div className="row isotope-grid" style={{textAlign: 'center'}}>
-                        {this.state.jign}
+                <div>
+                    <div style={{maxWidth: '80%', position: 'relative'}} >
+                        <select style={{margin: '10px 10px 10px 10px', width: '100px', position: 'absolute', right: 0}} value={this.props.sort} onChange={this.handleSort}>
+                            <option>Sort By</option>
+                            <option>Popularity</option>
+                            <option>New Arrivals</option>
+                            <option>Price - Low to High</option>
+                            <option>Price - High to Low</option>
+                        </select>
                     </div>
+                    <section className="category-section spad">
+                        <div className="container">
+                            <div className="row">
+                                <Filter refine={this.refine}/>
+
+                                <div className="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
+                                    <div className="row">
+                                    {this.state.jign}
+                                    </div>
+                                    <h1>{this.state.error}</h1>
+                                </div>
+                                {/* <div className="container">
+                                    <div className="row isotope-grid" style={{textAlign: 'center'}}>
+                                        {this.state.jign}
+                                    </div>
+                                </div> */}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* <div className="container">
+                        <div className="row isotope-grid" style={{textAlign: 'center'}}>
+                            {this.state.jign}
+                        </div>
+                    </div> */}
                 </div>
-                <Modal show={this.state.show}/>
             </React.Fragment>
         )
     }

@@ -17,8 +17,7 @@ class Cart extends Component {
 
     render() {
         let sd = []
-        let i = 0;
-        
+
         let fruits_without_duplicates = this.props.itemsFromNav;
         
         let pp = fruits_without_duplicates.filter((ele, ind) => ind === fruits_without_duplicates.findIndex(elem => elem.name === ele.name))
@@ -34,7 +33,6 @@ class Cart extends Component {
                     <button onClick={() => this.props.removeFromCart(fruits_without_duplicates.findIndex(elem => elem.name === ite.name))} style={{border: '1px solid red',padding: 3, paddingLeft: 6,  paddingRight: 6, marginTop: 5 }}>Remove</button>
                 </div>
             )
-            i+=1;
         })
 
         

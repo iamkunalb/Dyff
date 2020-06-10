@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import db from '../Config'
 import {Link} from 'react-router-dom'
 import '../index.css'
+import Popular from './Popular'
 
 export default class Product extends Component {
     constructor(){
@@ -10,8 +11,14 @@ export default class Product extends Component {
             name: "",
             price: "",
             image: "loding.gif",
-            inCart: false
+            qty: 1,
+            color: [],
+            ads: []
         }
+        
+        this.addQty = this.addQty.bind(this)
+        this.removeQty = this.removeQty.bind(this)
+
     }
 
     componentDidMount(){ 
@@ -19,17 +26,46 @@ export default class Product extends Component {
         db.collection('products').get().then(
             snapshot => {
                 snapshot.docs.forEach(doc => {
+                    // console.log(doc.data().color)
                     if (doc.data().name === this.props.match.params.id.split('-').join(' ')){
                         this.setState({
                             name: doc.data().name,
                             price: doc.data().price,
                             image: doc.data().image,
-                            inCart: doc.data().inCart,
                         })
                     }
                 })
             }
         )
+
+        let jj = []
+        this.state.color.map((color) => {
+            jj.push(
+                <option>{color}</option>
+            )
+        })
+        console.log(this.state.color)
+        this.setState({
+            ads: jj
+        })
+    }
+
+    addQty(){
+        this.setState({
+            qty: this.state.qty+1
+        })
+    }
+
+    removeQty(){
+        if (this.state.qty > 1){
+            this.setState({
+                qty: this.state.qty-1
+            })
+        }
+    }
+
+    handleChange (e) {
+        console.log('handle change called')
     }
 
     render() {
@@ -68,7 +104,7 @@ export default class Product extends Component {
                                                     <img src={require("../images/products/" + this.state.image)} alt="IMG-PRODUCT"/>
 
                                                     <a className="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04" href={require("../images/products/" + this.state.image)}>
-                                                        <i className="fa fa-expand"></i>
+                                                        <p className="fa fa-expand">X</p>
                                                     </a>
                                                 </div>
                                             </div>
@@ -118,10 +154,7 @@ export default class Product extends Component {
                                                 <div className="rs1-select2 bor8 bg0">
                                                     <select id="color" className="js-select2" name="time">
                                                         <option>Choose an option</option>
-                                                        <option>Red</option>
-                                                        <option>Blue</option>
-                                                        <option>White</option>
-                                                        <option>Grey</option>
+                                                        {this.state.ads}
                                                     </select>
                                                     <div className="dropDownSelect2"></div>
                                                 </div>
@@ -131,14 +164,14 @@ export default class Product extends Component {
                                         <div className="flex-w flex-r-m p-b-10">
                                             <div className="size-204 flex-w flex-m respon6-next">
                                                 <div className="wrap-num-product flex-w m-r-20 m-tb-10">
-                                                    <div className="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i className="fs-16 zmdi zmdi-minus"></i>
+                                                    <div className="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m" onClick={this.removeQty}>
+                                                        <i className="fs-16 zmdi zmdi-minus">-</i>
                                                     </div>
 
-                                                    <input id="qty" className="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value="1"/>
+                                                    <input id="qty" className="mtext-104 cl3 txt-center num-product" type="number" name="num-product" value={this.state.qty} onChange={(e) => {this.handleChange(e)}}/>
 
-                                                    <div className="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i className="fs-16 zmdi zmdi-plus"></i>
+                                                    <div className="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m" onClick={this.addQty}>
+                                                        <p className="fs-16 zmdi zmdi-plus">+</p>
                                                     </div>
                                                 </div>
 
@@ -258,209 +291,14 @@ export default class Product extends Component {
                     </div>
                 </section>         
 
-                <section className="sec-relate-product bg0 p-t-45 p-b-105">
+                <section className="sec-relate-product">
                     <div className="container">
-                        <div className="p-b-45">
-                            <h3 className="ltext-106 cl5 txt-center">
-                                Related Products
-                            </h3>
-                        </div>
-
-                        <div className="wrap-slick2">
-                            <div className="slick2">
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-01.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Esprit Ruffle Shirt
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $16.64
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-02.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Herschel supply
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $35.31
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-03.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Only Check Trouser
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $25.50
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                
-
-                                
-
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-06.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Vintage Inspired classNameic
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $93.20
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-07.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Shirt in Stretch Cotton
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $52.66
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="item-slick2 p-l-15 p-r-15 p-t-15 p-b-15">
-                                    <div className="block2">
-                                        <div className="block2-pic hov-img0">
-                                            <img src="images/product-08.jpg" alt="IMG-PRODUCT"/>
-
-                                            <a href="#" className="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
-                                                Quick View
-                                            </a>
-                                        </div>
-
-                                        <div className="block2-txt flex-w flex-t p-t-14">
-                                            <div className="block2-txt-child1 flex-col-l ">
-                                                <a href="product-detail.html" className="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
-                                                    Pieces Metallic Printed
-                                                </a>
-
-                                                <span className="stext-105 cl3">
-                                                    $18.96
-                                                </span>
-                                            </div>
-
-                                            <div className="block2-txt-child2 flex-r p-t-3">
-                                                <a href="#" className="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-                                                    <img className="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON"/>
-                                                    <img className="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON"/>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <h3 className="ltext-106 cl5 txt-center">
+                            Related Products
+                        </h3>
                     </div>
                 </section>       
+                {/* <Popular/> */}
             </div>
         )
     }

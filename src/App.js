@@ -19,6 +19,7 @@ import Returns from './components/Returns'
 import Charities from './components/Charities'
 import Terms from './components/Terms'
 import Privacy from './components/Privacy'
+import CartFull from './components/CartFull'
 
 class App extends Component {
   render() {
@@ -42,6 +43,7 @@ class App extends Component {
           <Route path="/men/:id" component={Product} />
           <Route path="/women/:id" component={Product} />
           <Route path="/onsale/:id" component={Product} />
+          <Route path="/checkout/cart" component={CartFull} />
           <Route component={Default}/>
         </Switch>
         <Footer/>

@@ -1,21 +1,24 @@
 import db from '../../Config'
 
-let gg = []
-db.collection('products').get().then(
-    snapshot => {
-        snapshot.docs.forEach(doc => {
-            gg.push(doc.data());
-        })
-    }
-)
 
 const reducer = (state, action) => {
+    
+    let gg = []
+    db.collection('products').get().then(
+        snapshot => {
+            snapshot.docs.forEach(doc => {
+                gg.push(doc.data());
+            })
+        }
+    )
     if (state === undefined){
         return{
             forSale: gg,
             cart: []
         }
     }
+
+    state.forSale = gg;
 
     switch (action.type){
         case 'ADD_TO_CART': {

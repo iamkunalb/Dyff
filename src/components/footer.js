@@ -125,7 +125,7 @@ export default class footer extends Component {
                             </Link>
                         </div>
 
-                        <div className="col-xs-6 mr-5 ml-5 d-md-none">
+                        <div className="col-xs-6 mr-5 ml-3 d-md-none">
                             <h6>About</h6>
                             <Link to="/about">
                                 About Us

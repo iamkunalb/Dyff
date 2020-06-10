@@ -4,8 +4,9 @@ import logo from '../lgo.png'
 import {Link} from 'react-router-dom'
 import '../util.css'
 import Cart from './Cart'
+import {connect} from 'react-redux'
 
-export default class Navbar extends Component {
+class Navbar extends Component {
     constructor(props) 
     { 
         super(props); 
@@ -109,7 +110,7 @@ export default class Navbar extends Component {
                                     </Link>
                                 </li> */}
 
-                                <li>
+                                {/* <li>
                                     <Link to="/about">
                                         About
                                     </Link>
@@ -119,7 +120,7 @@ export default class Navbar extends Component {
                                     <Link to="/contact">
                                         Contact
                                     </Link>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
 
@@ -128,8 +129,10 @@ export default class Navbar extends Component {
                                 <i className="zmdi zmdi-search"></i>
                             </div>
 
-                            <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify={this.state.sd}>
-                                <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart}  src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
+                            <div className="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart" data-notify={this.props.itemsFromNav.length}>
+                                {/* <Link to='/checkout/cart'> */}
+                                <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart} src='https://i.pinimg.com/originals/09/88/dc/0988dc27ab24d196b91d085c786c292d.png' alt="cart"/>
+                                {/* </Link> */}
                             </div>
                         </div>
                     </nav>
@@ -149,8 +152,8 @@ export default class Navbar extends Component {
                             <i className="zmdi zmdi-search"></i>
                         </div>
 
-                        <div className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify={this.state.sd}>
-                            <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart}  src='https://i.ya-webdesign.com/images/shopping-cart-icon-png-3.png'/>
+                        <div className="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart" data-notify={this.props.itemsFromNav.length}>
+                            <img className="zmdi zmdi-shopping-cart" style={{width: 30}} onClick={this.openCart}  src='https://i.pinimg.com/originals/09/88/dc/0988dc27ab24d196b91d085c786c292d.png' alt="cart"/>
                         </div>
                     </div>
 
@@ -183,9 +186,10 @@ export default class Navbar extends Component {
                     <a className="closebtn" onClick={this.closeNav}>&times;</a>
                     <Link to="/men" onClick={this.closeNav}>Men</Link>
                     <Link to="/women" onClick={this.closeNav}>Women</Link>
-                    <Link to="/onsale" onClick={this.closeNav}>On Sale</Link>
-                    <Link to="/about" onClick={this.closeNav}>About</Link>
-                    <Link to="/contact" onClick={this.closeNav}>Contact</Link>
+                    {/* <Link to="/onsale" onClick={this.closeNav}>On Sale</Link> */}
+                    {/* <Link to="/about" onClick={this.closeNav}>About</Link> */}
+                    {/* <Link to="/contact" onClick={this.closeNav}>Contact</Link> */}
+                    <Link to="/login" onClick={this.closeNav}>Login</Link>
                 </div>
 
                 <div id="cart" className="cart" style={{width: this.state.cartWidth}}>
@@ -201,3 +205,11 @@ export default class Navbar extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    return{
+        itemsFromNav: state.cart
+    }
+}
+
+export default connect(mapStateToProps)(Navbar)

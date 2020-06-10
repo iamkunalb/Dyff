@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
 import armDay from '../images/products/dyff-arm-day.png'
-import db from '../Config'
+import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
-
-export default class Popular extends Component {
+class Popular extends Component {
+  constructor(props){
+    super(props);
+    this.state={
+      ahs: this.props.itemsFromNav
+    }
+  }
+  
     render() {
         var settings = {
           dots: false,
@@ -42,40 +49,26 @@ export default class Popular extends Component {
           ]
         };
 
-        let gg = [{name: 'hello', price:10}, {name: 'GG', price:30},{name: 'hello', price:10}, {name: 'GG', price:30},{name: 'hello', price:10}, {name: 'GG', price:30}]
         let ff = []
-        // let gg = []
-        
-        // db.collection('products').get().then(
-        //   snapshot => {
-        //     snapshot.docs.map((doc) => {
-        //       // console.log(doc.data().name)
-        //       gg.push(
-        //         <div style={{textAlign: 'center', display: 'block'}}>
-        //         <img height="auto" width="80%" src={armDay} alt="prod1"/>
-        //         <h3>{doc.data().name}</h3>
-        //         <h3>{doc.data().price}</h3>
-        //       </div>
-        //       )
-        //     })
-        //   }
-        // )
-        // console.log(gg)
-          
-        for (let i = 0; i < gg.length;i++){
-          ff.push(
-              <div key={i} style={{textAlign: 'center', display: 'block'}}>
-                <img height="auto" width="80%" src={armDay} alt="prod1"/>
-                <h3>{gg[i].name}</h3>
-                <h3>{gg[i].price}</h3>
-              </div>
-          )
-        }
+        let pp = this.state.ahs;
 
+        pp.map((ite, index) => {
+          let namee = ite.name.split(' ').join('-');
+          ff.push(
+            <div key={index} style={{textAlign: 'center', display: 'block'}}>
+              <Link to={"/men/"+namee}>
+                <img height="auto" width="80%" src={require('../images/products/' + ite.image)} alt="prod1"/>
+                  {/* <img id="prodImage" style={{height: '100%', width: '100%'}} src={require('../images/products/' + doc.image)} alt="IMG-PRODUCT"/> */}
+              </Link>  
+              <h3>{ite.name}</h3>
+              <h3>{ite.price}</h3>
+            </div>
+          )
+      })
 
         return (
           <div style={{margin: '10vh 10vw 10vh 10vw'}}>
-            <h2> Popular </h2>
+            
             <Slider {...settings}>
               {ff}
             </Slider>
@@ -83,3 +76,12 @@ export default class Popular extends Component {
         );
       }
 }
+
+function mapStateToProps(state){
+  return{
+      itemsFromNav: state.forSale
+  }
+}
+
+export default connect(mapStateToProps)(Popular)
+
