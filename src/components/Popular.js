@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Slider from 'react-slick'
-import armDay from '../images/products/dyff-arm-day.png'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 

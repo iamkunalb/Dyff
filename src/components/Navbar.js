@@ -92,7 +92,7 @@ class Navbar extends Component {
                                     </Link>
                                 </li> */}
 
-                                <li>
+                                {/* <li>
                                     <Link to="/men">
                                         Men
                                     </Link>
@@ -101,6 +101,12 @@ class Navbar extends Component {
                                 <li>
                                     <Link to="/women">
                                         Women
+                                    </Link>
+                                </li> */}
+
+                                <li>
+                                    <Link to="/shop">
+                                        Shop
                                     </Link>
                                 </li>
 

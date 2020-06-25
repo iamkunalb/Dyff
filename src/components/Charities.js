@@ -17,7 +17,7 @@ export default class About extends Component {
                     <img  width="80%" style={{minWidth: '300px'}} height="auto" src={slider1} alt="sliderPic"/>
                 </div> */}
                 <div style={{width: '100%'}}>
-                <div style={{display: 'table', width: '80%', margin: '0 auto', position:'relative', textAlign: 'center', maxHeight: '400px', overflow: 'hidden', backgroundColor: 'black', color:'white', height: 150}}>
+                    <div style={{display: 'table', width: '80%', margin: '0 auto', position:'relative', textAlign: 'center', maxHeight: '400px', overflow: 'hidden', backgroundColor: 'black', color:'white', height: 150}}>
                         <div style={{display: 'table-cell', verticalAlign: 'middle', color: 'white'}}>
                             <h1 style={{color: 'white'}}>
                         Charities.

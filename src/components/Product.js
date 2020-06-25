@@ -298,7 +298,7 @@ export default class Product extends Component {
                         </h3>
                     </div>
                 </section>       
-                {/* <Popular/> */}
+                <Popular/>
             </div>
         )
     }

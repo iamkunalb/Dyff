@@ -68,7 +68,7 @@ class Women extends Component {
                 error: ""
             })
         }
-        if (temp === undefined || temp.length == 0){
+        if (temp === undefined || temp.length === 0){
             // console.log("emp")
             this.setState({
                 error: "No Items Found!"

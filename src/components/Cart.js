@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
 
 class Cart extends Component {
     total(){
@@ -40,8 +41,10 @@ class Cart extends Component {
         return (
             <div>
                 {sd}
-                <div style={{}}>
-                    <button style={{border: '1px solid black', bottom: '0', position: 'absolute', left: '0', margin: '0 20px 20px 20px'}}>Continue to checkout</button>
+                <div>
+                    <Link to="/checkout/cart">
+                        <h5 style={{border: '1px solid black', bottom: '0', position: 'absolute', left: '0', margin: '0 20px 20px 20px'}}>Continue to checkout</h5>
+                    </Link>
                     <h3 style={{bottom: '0', position: 'absolute', right: '0', margin: '0 20px 20px 0'}}>Total: ${this.total()}.00</h3>
                 </div>
             </div>

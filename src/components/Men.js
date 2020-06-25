@@ -3,8 +3,6 @@ import slider2 from '../images/slide-02.jpg'
 import {Link} from 'react-router-dom'
 import db from '../Config'
 import Filter from './filter'
-// import Modal from './Modal'
-// import { addToCart } from './actions/cartActions'
 import {connect} from 'react-redux'
 
 class Men extends Component {
@@ -21,6 +19,7 @@ class Men extends Component {
         this.updateProds = this.updateProds.bind(this);
         this.showModal = this.showModal.bind(this);
         this.refine = this.refine.bind(this);
+        this.menen = this.menen.bind(this);
     }
 
     showModal(){
@@ -68,12 +67,16 @@ class Men extends Component {
                 error: ""
             })
         }
-        if (temp === undefined || temp.length == 0){
+        if (temp === undefined || temp.length === 0){
             // console.log("emp")
             this.setState({
                 error: "No Items Found!"
             })
         }
+    }
+
+    menen(e){
+        console.log("men")
     }
 
     updateProds(filterProd){
@@ -201,26 +204,26 @@ class Men extends Component {
     render() {
         return (
             <React.Fragment>
-                <div style={{position:'relative', textAlign: 'center', maxHeight: '400px', overflow: 'hidden'}} className="d-xl-none">
+                <div style={{position:'relative', textAlign: 'center', maxHeight: '200px', overflow: 'hidden'}} className="d-xl-none">
                     <img  width="100%" style={{minWidth: '300px'}} height="auto" src={slider2} alt="sliderPic"/>
                 </div>
             
-                <div style={{position:'relative', textAlign: 'center', maxHeight: '500px', overflow: 'hidden'}} className="d-none d-xl-block">
+                <div style={{position:'relative', textAlign: 'center', maxHeight: '250px', overflow: 'hidden'}} className="d-none d-xl-block">
                     <img  width="80%" style={{minWidth: '300px'}} height="auto" src={slider2} alt="sliderPic"/>
                 </div>
+                        <div style={{maxWidth: '80%', position: 'relative'}} >
+                            <select style={{margin: '10px 10px 10px 10px', width: '100px', position: 'absolute', right: 0}} value={this.props.sort} onChange={this.handleSort}>
+                                <option>Sort By</option>
+                                <option>Popularity</option>
+                                <option>New Arrivals</option>
+                                <option>Price - Low to High</option>
+                                <option>Price - High to Low</option>
+                            </select>
+                        </div>
                 <div>
-                    <div style={{maxWidth: '80%', position: 'relative'}} >
-                        <select style={{margin: '10px 10px 10px 10px', width: '100px', position: 'absolute', right: 0}} value={this.props.sort} onChange={this.handleSort}>
-                            <option>Sort By</option>
-                            <option>Popularity</option>
-                            <option>New Arrivals</option>
-                            <option>Price - Low to High</option>
-                            <option>Price - High to Low</option>
-                        </select>
-                    </div>
-                    <section className="category-section spad">
+                    <section className="category-section spad" style={{paddingTop: 0}}>
                         <div className="container">
-                            <div className="row">
+                            <div className="row" style={{marginTop: 100}}>
                                 <Filter refine={this.refine}/>
 
                                 <div className="col-lg-9 order-1 order-lg-2 mb-5 mb-lg-0">
@@ -251,7 +254,8 @@ class Men extends Component {
 
 function mapStateToProps(state){
     return{
-        dsds: state.forSale
+        dsds: state.forSale,
+        coe: state.codess
     }
 }
 

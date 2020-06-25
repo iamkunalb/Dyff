@@ -49,6 +49,14 @@ export default class filter extends Component {
                     </div>
                 </div> */}
                 <div className="filter-widget mb-0">
+                    <h2 className="fw-title">Refine</h2>
+                    <div className="fw-color-choose">
+                        <button onClick={this.props.menen}>Men</button>
+                        <span onClick={this.props.menen}>Women</span>
+                    </div>
+                </div>
+
+                <div className="filter-widget mb-0">
                     <h2 className="fw-title">color</h2>
                     <div className="fw-color-choose">
                         <div className="cs-item">
